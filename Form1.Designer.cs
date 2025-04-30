@@ -81,7 +81,8 @@
             // 
             // btnVerifyText
             // 
-            btnVerifyText.Location = new Point(295, 300);
+            btnVerifyText.Anchor = AnchorStyles.None;
+            btnVerifyText.Location = new Point(318, 300);
             btnVerifyText.Margin = new Padding(4, 5, 4, 5);
             btnVerifyText.Name = "btnVerifyText";
             btnVerifyText.Size = new Size(100, 35);
@@ -92,7 +93,8 @@
             // 
             // btnRefreshText
             // 
-            btnRefreshText.Location = new Point(187, 300);
+            btnRefreshText.Anchor = AnchorStyles.None;
+            btnRefreshText.Location = new Point(210, 300);
             btnRefreshText.Margin = new Padding(4, 5, 4, 5);
             btnRefreshText.Name = "btnRefreshText";
             btnRefreshText.Size = new Size(100, 35);
@@ -103,7 +105,8 @@
             // 
             // txtTextCaptcha
             // 
-            txtTextCaptcha.Location = new Point(188, 260);
+            txtTextCaptcha.Anchor = AnchorStyles.None;
+            txtTextCaptcha.Location = new Point(211, 260);
             txtTextCaptcha.Margin = new Padding(4, 5, 4, 5);
             txtTextCaptcha.Name = "txtTextCaptcha";
             txtTextCaptcha.Size = new Size(207, 27);
@@ -111,8 +114,9 @@
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
-            label1.Location = new Point(189, 227);
+            label1.Location = new Point(212, 227);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(207, 20);
@@ -123,7 +127,7 @@
             // 
             picTextCaptcha.Anchor = AnchorStyles.None;
             picTextCaptcha.BorderStyle = BorderStyle.FixedSingle;
-            picTextCaptcha.Location = new Point(196, 136);
+            picTextCaptcha.Location = new Point(219, 136);
             picTextCaptcha.Margin = new Padding(4, 5, 4, 5);
             picTextCaptcha.Name = "picTextCaptcha";
             picTextCaptcha.Size = new Size(191, 76);
@@ -258,7 +262,7 @@
             // 
             // btnRecaptchaVerify
             // 
-            btnRecaptchaVerify.Location = new Point(260, 185);
+            btnRecaptchaVerify.Location = new Point(261, 234);
             btnRecaptchaVerify.Margin = new Padding(4, 5, 4, 5);
             btnRecaptchaVerify.Name = "btnRecaptchaVerify";
             btnRecaptchaVerify.Size = new Size(100, 35);
@@ -270,7 +274,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(147, 92);
+            label2.Location = new Point(145, 146);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(332, 20);
@@ -281,7 +285,7 @@
             // 
             chkRecaptcha.Appearance = Appearance.Button;
             chkRecaptcha.AutoSize = true;
-            chkRecaptcha.Location = new Point(151, 117);
+            chkRecaptcha.Location = new Point(160, 185);
             chkRecaptcha.Margin = new Padding(4, 5, 4, 5);
             chkRecaptcha.Name = "chkRecaptcha";
             chkRecaptcha.Size = new Size(303, 30);
