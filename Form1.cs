@@ -74,9 +74,11 @@ namespace CaptchaGen
 
         private void btnVerifyText_Click(object sender, EventArgs e)
         {
-            if (txtTextCaptcha.Text.Equals(currentTextCaptcha, StringComparison.OrdinalIgnoreCase))
+            if (txtTextCaptcha.Text.Equals(currentTextCaptcha, StringComparison.Ordinal))
             {
                 MessageBox.Show("Text CAPTCHA verification successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtTextCaptcha.Text = string.Empty;
+                GenerateTextCaptcha();
             }
             else
             {
@@ -87,6 +89,7 @@ namespace CaptchaGen
         private void btnRefreshText_Click(object sender, EventArgs e)
         {
             GenerateTextCaptcha();
+            txtTextCaptcha.Text = string.Empty;
         }
         #endregion
 
@@ -105,6 +108,8 @@ namespace CaptchaGen
             if (int.TryParse(txtMathCaptcha.Text, out int result) && result == currentMathCaptchaResult)
             {
                 MessageBox.Show("Math CAPTCHA verification successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtMathCaptcha.Text = string.Empty;
+                GenerateMathCaptcha();
             }
             else
             {
@@ -115,67 +120,68 @@ namespace CaptchaGen
         private void btnRefreshMath_Click(object sender, EventArgs e)
         {
             GenerateMathCaptcha();
+            txtMathCaptcha.Text = string.Empty;
         }
         #endregion
 
         #region Image CAPTCHA
         private static readonly Random random = new Random();
 
-private void GenerateImageCaptcha()
-{
-    selectedImages.Clear();
-
-    foreach (var box in imageBoxes)
-    {
-        picImageContainer.Controls.Remove(box);
-    }
-    imageBoxes.Clear();
-
-    currentImageChallenge = imageCategories[random.Next(imageCategories.Count)];
-    lblImageChallenge.Text = $"Select all images with: {currentImageChallenge}";
-
-    correctImages.Clear();
-    List<string> imageTags = new List<string>();
-
-    for (int i = 0; i < 3; i++)
-        imageTags.Add(currentImageChallenge);
-    correctImages.AddRange(imageTags);
-
-    var incorrectCategories = imageCategories
-        .Where(cat => cat != currentImageChallenge)
-        .ToList();
-
-    for (int i = 0; i < 6; i++)
-    {
-        string randomIncorrect = incorrectCategories[random.Next(incorrectCategories.Count)];
-        imageTags.Add(randomIncorrect);
-    }
-
-    imageTags = imageTags.OrderBy(x => random.Next()).ToList();
-
-    int size = 80;
-    int margin = 10;
-    for (int i = 0; i < 9; i++)
-    {
-        var box = new PictureBox
+        private void GenerateImageCaptcha()
         {
-            Width = size,
-            Height = size,
-            Left = margin + (i % 3) * (size + margin),
-            Top = 40 + (i / 3) * (size + margin),
-            BorderStyle = BorderStyle.FixedSingle,
-            SizeMode = PictureBoxSizeMode.StretchImage,
-            Tag = imageTags[i],
-            Image = GetSampleImage(imageTags[i])
-        };
+            // Clear the selected images list when generating a new CAPTCHA
+            selectedImages.Clear();
 
-        box.Click += ImageBox_Click;
+            foreach (var box in imageBoxes)
+            {
+                picImageContainer.Controls.Remove(box);
+            }
+            imageBoxes.Clear();
 
-        picImageContainer.Controls.Add(box);
-        imageBoxes.Add(box);
-    }
-}
+            currentImageChallenge = imageCategories[random.Next(imageCategories.Count)];
+            lblImageChallenge.Text = $"Select all images with: {currentImageChallenge}";
 
+            correctImages.Clear();
+            List<string> imageTags = new List<string>();
+
+            for (int i = 0; i < 3; i++)
+                imageTags.Add(currentImageChallenge);
+            correctImages.AddRange(imageTags);
+
+            var incorrectCategories = imageCategories
+                .Where(cat => cat != currentImageChallenge)
+                .ToList();
+
+            for (int i = 0; i < 6; i++)
+            {
+                string randomIncorrect = incorrectCategories[random.Next(incorrectCategories.Count)];
+                imageTags.Add(randomIncorrect);
+            }
+
+            imageTags = imageTags.OrderBy(x => random.Next()).ToList();
+
+            int size = 80;
+            int margin = 10;
+            for (int i = 0; i < 9; i++)
+            {
+                var box = new PictureBox
+                {
+                    Width = size,
+                    Height = size,
+                    Left = margin + (i % 3) * (size + margin),
+                    Top = 40 + (i / 3) * (size + margin),
+                    BorderStyle = BorderStyle.FixedSingle,
+                    SizeMode = PictureBoxSizeMode.StretchImage,
+                    Tag = imageTags[i],
+                    Image = GetSampleImage(imageTags[i])
+                };
+
+                box.Click += ImageBox_Click;
+
+                picImageContainer.Controls.Add(box);
+                imageBoxes.Add(box);
+            }
+        }
 
         private Image GetSampleImage(string category)
         {
@@ -213,27 +219,42 @@ private void GenerateImageCaptcha()
             var box = (PictureBox)sender;
             string category = box.Tag.ToString();
 
-            if (box.BorderStyle == BorderStyle.Fixed3D)
+            bool isSelected = box.BackColor == Color.LimeGreen;
+
+            if (isSelected)
             {
-                box.BorderStyle = BorderStyle.FixedSingle;
                 selectedImages.Remove(category);
+                box.BorderStyle = BorderStyle.FixedSingle;
+                box.BackColor = Color.Transparent;
+                box.Padding = new Padding(0);
             }
             else
             {
-                box.BorderStyle = BorderStyle.Fixed3D;
                 selectedImages.Add(category);
+                box.BorderStyle = BorderStyle.FixedSingle;
+                box.BackColor = Color.LimeGreen;
+                box.Padding = new Padding(4);
             }
         }
 
         private void btnVerifyImage_Click(object sender, EventArgs e)
         {
-            bool allCorrect = correctImages.All(img => selectedImages.Contains(img));
-            bool noIncorrect = selectedImages.All(img => correctImages.Contains(img));
+            int requiredCorrectCount = correctImages.Count;
 
-            if (allCorrect && noIncorrect && selectedImages.Count > 0)
+            int selectedCorrectCount = selectedImages.Count(img => img == currentImageChallenge);
+
+            int totalSelectedCount = selectedImages.Count;
+
+
+            bool success = (selectedCorrectCount == requiredCorrectCount) &&
+                           (totalSelectedCount == requiredCorrectCount);
+
+            if (success)
             {
                 MessageBox.Show("Image CAPTCHA verification successful!", "Success",
                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                selectedImages.Clear();
+                GenerateImageCaptcha();
             }
             else
             {
@@ -244,6 +265,8 @@ private void GenerateImageCaptcha()
 
         private void btnRefreshImage_Click(object sender, EventArgs e)
         {
+            // Clear selections before refreshing
+            selectedImages.Clear();
             GenerateImageCaptcha();
         }
         #endregion
@@ -254,6 +277,8 @@ private void GenerateImageCaptcha()
             if (chkRecaptcha.Checked)
             {
                 MessageBox.Show("reCAPTCHA verification successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Reset checkbox after verification
+                chkRecaptcha.Checked = false;
             }
             else
             {
@@ -273,9 +298,11 @@ private void GenerateImageCaptcha()
                     GenerateMathCaptcha();
                     break;
                 case 2: // Image
+                    selectedImages.Clear();
                     GenerateImageCaptcha();
                     break;
                 case 3: // reCAPTCHA
+                    chkRecaptcha.Checked = false;
                     break;
             }
         }

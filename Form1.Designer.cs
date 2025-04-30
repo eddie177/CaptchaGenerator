@@ -81,7 +81,7 @@
             // 
             // btnVerifyText
             // 
-            btnVerifyText.Location = new Point(290, 300);
+            btnVerifyText.Location = new Point(295, 300);
             btnVerifyText.Margin = new Padding(4, 5, 4, 5);
             btnVerifyText.Name = "btnVerifyText";
             btnVerifyText.Size = new Size(100, 35);
@@ -92,7 +92,7 @@
             // 
             // btnRefreshText
             // 
-            btnRefreshText.Location = new Point(182, 300);
+            btnRefreshText.Location = new Point(187, 300);
             btnRefreshText.Margin = new Padding(4, 5, 4, 5);
             btnRefreshText.Name = "btnRefreshText";
             btnRefreshText.Size = new Size(100, 35);
@@ -103,7 +103,7 @@
             // 
             // txtTextCaptcha
             // 
-            txtTextCaptcha.Location = new Point(185, 260);
+            txtTextCaptcha.Location = new Point(188, 260);
             txtTextCaptcha.Margin = new Padding(4, 5, 4, 5);
             txtTextCaptcha.Name = "txtTextCaptcha";
             txtTextCaptcha.Size = new Size(207, 27);
@@ -112,12 +112,12 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(181, 227);
+            label1.Location = new Point(189, 227);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(233, 20);
+            label1.Size = new Size(207, 20);
             label1.TabIndex = 1;
-            label1.Text = "Enter the text from the image left:";
+            label1.Text = "Enter the text from the image:";
             // 
             // picTextCaptcha
             // 
@@ -147,7 +147,7 @@
             // 
             // btnVerifyMath
             // 
-            btnVerifyMath.Location = new Point(260, 185);
+            btnVerifyMath.Location = new Point(309, 244);
             btnVerifyMath.Margin = new Padding(4, 5, 4, 5);
             btnVerifyMath.Name = "btnVerifyMath";
             btnVerifyMath.Size = new Size(100, 35);
@@ -158,7 +158,7 @@
             // 
             // btnRefreshMath
             // 
-            btnRefreshMath.Location = new Point(152, 185);
+            btnRefreshMath.Location = new Point(201, 244);
             btnRefreshMath.Margin = new Padding(4, 5, 4, 5);
             btnRefreshMath.Name = "btnRefreshMath";
             btnRefreshMath.Size = new Size(100, 35);
@@ -169,7 +169,7 @@
             // 
             // txtMathCaptcha
             // 
-            txtMathCaptcha.Location = new Point(152, 145);
+            txtMathCaptcha.Location = new Point(201, 204);
             txtMathCaptcha.Margin = new Padding(4, 5, 4, 5);
             txtMathCaptcha.Name = "txtMathCaptcha";
             txtMathCaptcha.Size = new Size(207, 27);
@@ -179,7 +179,7 @@
             // 
             lblMathCaptcha.AutoSize = true;
             lblMathCaptcha.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblMathCaptcha.Location = new Point(147, 92);
+            lblMathCaptcha.Location = new Point(196, 151);
             lblMathCaptcha.Margin = new Padding(4, 0, 4, 0);
             lblMathCaptcha.Name = "lblMathCaptcha";
             lblMathCaptcha.Size = new Size(85, 29);
