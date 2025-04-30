@@ -119,55 +119,68 @@ namespace CaptchaGen
         #endregion
 
         #region Image CAPTCHA
-        private void GenerateImageCaptcha()
+        private static readonly Random random = new Random();
+
+private void GenerateImageCaptcha()
+{
+    selectedImages.Clear();
+
+    foreach (var box in imageBoxes)
+    {
+        picImageContainer.Controls.Remove(box);
+    }
+    imageBoxes.Clear();
+
+    currentImageChallenge = imageCategories[random.Next(imageCategories.Count)];
+    lblImageChallenge.Text = $"Select all images with: {currentImageChallenge}";
+
+    correctImages.Clear();
+    List<string> imageTags = new List<string>();
+
+    for (int i = 0; i < 3; i++)
+        imageTags.Add(currentImageChallenge);
+    correctImages.AddRange(imageTags);
+
+    var incorrectCategories = imageCategories
+        .Where(cat => cat != currentImageChallenge)
+        .ToList();
+
+    for (int i = 0; i < 6; i++)
+    {
+        string randomIncorrect = incorrectCategories[random.Next(incorrectCategories.Count)];
+        imageTags.Add(randomIncorrect);
+    }
+
+    imageTags = imageTags.OrderBy(x => random.Next()).ToList();
+
+    int size = 80;
+    int margin = 10;
+    for (int i = 0; i < 9; i++)
+    {
+        var box = new PictureBox
         {
-            selectedImages.Clear();
+            Width = size,
+            Height = size,
+            Left = margin + (i % 3) * (size + margin),
+            Top = 40 + (i / 3) * (size + margin),
+            BorderStyle = BorderStyle.FixedSingle,
+            SizeMode = PictureBoxSizeMode.StretchImage,
+            Tag = imageTags[i],
+            Image = GetSampleImage(imageTags[i])
+        };
 
-            foreach (var box in imageBoxes)
-            {
-                picImageContainer.Controls.Remove(box);
-            }
-            imageBoxes.Clear();
+        box.Click += ImageBox_Click;
 
-            var random = new Random();
-            currentImageChallenge = imageCategories[random.Next(imageCategories.Count)];
-            lblImageChallenge.Text = $"Select all images with: {currentImageChallenge}";
+        picImageContainer.Controls.Add(box);
+        imageBoxes.Add(box);
+    }
+}
 
-            correctImages.Clear();
-            for (int i = 0; i < 3; i++)
-            {
-                correctImages.Add(currentImageChallenge);
-            }
-
-            int size = 80;
-            int margin = 10;
-            for (int i = 0; i < 9; i++)
-            {
-                var box = new PictureBox
-                {
-                    Width = size,
-                    Height = size,
-                    Left = margin + (i % 3) * (size + margin),
-                    Top = 40 + (i / 3) * (size + margin),
-                    BorderStyle = BorderStyle.FixedSingle,
-                    SizeMode = PictureBoxSizeMode.StretchImage,
-                    Tag = i < 3 ? currentImageChallenge :
-                          imageCategories[random.Next(imageCategories.Count)]
-                };
-
-                box.Image = GetSampleImage(box.Tag.ToString());
-                box.Click += ImageBox_Click;
-
-                picImageContainer.Controls.Add(box);
-                imageBoxes.Add(box);
-            }
-        }
 
         private Image GetSampleImage(string category)
         {
             try
             {
-                // Try to load real image if exists
                 string imagePath = Path.Combine(Application.StartupPath, "Images", $"{category}.jpg");
                 if (File.Exists(imagePath))
                 {
@@ -176,7 +189,6 @@ namespace CaptchaGen
             }
             catch { }
 
-            // Fallback to generated image
             var bmp = new Bitmap(80, 80);
             using (var g = Graphics.FromImage(bmp))
             {
