@@ -48,7 +48,7 @@ This is a C# Windows Forms application designed to demonstrate various CAPTCHA t
 ## 🖼️ Project Snapshot
 
 <p align="center">
-  <img src="Assets/captcha_ui.png" alt="CAPTCHA UI Snapshot" width="600"/>
+  <img src="Assets/captcha_ui.jpg" alt="CAPTCHA UI Snapshot" width="600"/>
 </p>
 
 ## 🎥 Project Demo
