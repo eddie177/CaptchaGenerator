@@ -1,69 +1,65 @@
-# Smart CV & Form Validator
+# 🔐 CAPTCHA Validator – C# Windows Forms Application
 
+## 📄 Project Description
 
-https://github.com/user-attachments/assets/23b39504-a1cc-4486-ac77-3e8035ca7295
+This is a C# Windows Forms application designed to demonstrate various CAPTCHA types for human verification and bot prevention. The application showcases four distinct CAPTCHA methods and allows users to refresh the challenge with a simple click, all within an intuitive graphical interface.
 
+## ✨ Features
 
-A C# Windows Forms application for validating user form input and parsing CV content using Regular Expressions (Regex).
+- **Text CAPTCHA**  
+  Displays a distorted alphanumeric code that users must enter correctly.
 
-## 🚀 Features
+- **Image CAPTCHA**  
+  Shows an image-based challenge where the user must recognize characters or patterns.
 
-### 1. Manual Form Entry
-- User can enter:
-  - Name
-  - Email
-  - Phone Number
-  - Password
-  - Address
-  - Postal Code
-- Each input is validated using Regex
-- Feedback is shown in a message box
+- **Math-Based CAPTCHA**  
+  Generates a random arithmetic question (e.g., `7 + 4`) that users must solve.
 
-### 2. CV Text Parsing
-- Paste or upload plain-text CV content
-- Automatically extracts:
-  - Full Name
-  - Email Address
-  - Phone Number
-  - Skills (e.g., C#, Java, SQL)
-  - Years of Experience (e.g., "3 years")
-- Results are displayed in a message box
+- **ReCAPTCHA Checkbox (Simulated)**  
+  A mock version of the "I’m not a robot" checkbox, representing a basic bot-check mechanism.
 
-## 💻 Tech Stack
+- **Refresh Option**  
+  Each CAPTCHA type includes a **refresh** button to generate a new challenge.
 
-- C#
-- .NET Windows Forms
-- Regex (System.Text.RegularExpressions)
+- **Simple UI**  
+  Clean and straightforward interface for easy usability and testing.
 
-## 📂 How to Use
+## 👥 Team Members
 
-1. Clone the repository
-2. Open the solution in Visual Studio
-3. Run the project
-4. Test form validation and CV parsing
+- **Ahmed Ehab Mohamed Rashad** – 221101026  
+- **Mazen Ehab Fathy Samaha** – 221101055  
+- **Khaled El-Saeid Hamed Zahran** – 221101039
 
-## ✅ Example CV Input
-```
-Name: Sarah Johnson  
-Email: sarah@example.com  
-Phone: +12345678901  
+## 🔄 How It Works
 
-Professional Summary:  
-A highly motivated software engineer with 3 years of experience in developing enterprise-level applications. 
+1. User selects a CAPTCHA type from the interface.
+2. The system generates a random challenge based on the selected type.
+3. The user attempts to solve the CAPTCHA and submits their response.
+4. The system validates the input and provides feedback.
+5. A **Refresh** button allows the user to request a new challenge at any time.
 
-Skills:  
-Java,, Python,, JavaScript  
+## 🛠️ Technologies Used
 
-Work Experience:  
-Software Developer at Tech Solutions Inc.  
-March 2021 – Present  
-- Managed databases using SQL Server  
-- Collaborated with cross-functional teams  
+- **C#**
+- **Windows Forms (WinForms)**
+- **GDI+ (for drawing CAPTCHA text/images)**
+- **.NET Framework**
 
-Education:  
-Bachelor of Computer Science  
-University of Technology – 2018
+## 🖼️ Project Snapshot
 
-Languages:  
-English, French
-```
+<p align="center">
+  <img src="Assets/captcha_ui.png" alt="CAPTCHA UI Snapshot" width="600"/>
+</p>
+
+## 🎥 Project Demo
+
+[Download the Demo Video](Assets/CaptchaDemo.mp4)
+
+## 🚧 Limitations & Future Enhancements
+
+- Simulated ReCAPTCHA checkbox – not linked to Google’s actual ReCAPTCHA service.
+- Limited complexity in image and text distortion techniques.
+- Future improvements may include:
+  - Google ReCAPTCHA v2/v3 integration
+  - Audio CAPTCHA support
+  - Enhanced visual effects (noise, rotation)
