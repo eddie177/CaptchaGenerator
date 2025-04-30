@@ -10,7 +10,7 @@ This is a C# Windows Forms application designed to demonstrate various CAPTCHA t
   Displays a distorted alphanumeric code that users must enter correctly.
 
 - **Image CAPTCHA**  
-  Shows an image-based challenge where the user must recognize characters or patterns.
+  Shows an image-based challenge where the user must recognize certain objects.
 
 - **Math-Based CAPTCHA**  
   Generates a random arithmetic question (e.g., `7 + 4`) that users must solve.
@@ -63,3 +63,4 @@ This is a C# Windows Forms application designed to demonstrate various CAPTCHA t
   - Google ReCAPTCHA v2/v3 integration
   - Audio CAPTCHA support
   - Enhanced visual effects (noise, rotation)
+  - Using different random images for image captcha
